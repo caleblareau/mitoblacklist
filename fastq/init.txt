@@ -1,0 +1,3 @@
+This folder houses the fastq files
+generated from executing the shell script
+in the directory above

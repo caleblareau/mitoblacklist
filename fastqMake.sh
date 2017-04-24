@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NREADS=100
+NREADS=10000000
 
 genomes="hg19 hg38 mm9 mm10"
 
