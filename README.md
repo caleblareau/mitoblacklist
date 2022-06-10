@@ -3,7 +3,7 @@ This repository enables the generation of  custom blacklist for reads originatin
 
 ### Overview
 
-This workflow shows how to simulate reads using ART from the mitochondrial contig, align them to the reference with bowtie2, pull out non-mitochondrial contigs, then produce a bed file of reads that are mapped with macs2. We then recommend merging this file with an existing reference blacklist (e.g. ENCODE) to create a final combined blacklist. We include these combined blacklists for four common reference genomes (hg19, hg38, mm9, mm10) already in the [combinedBlacklist](https://github.com/caleblareau/mitoblacklist/tree/master/combinedBlacklist) folder. This bedfile can be used in conjugation with a hard masking of the reference genome [to increase coverage in one alignment as we outline here](https://github.com/caleblareau/mgatk/wiki/Increasing-coverage-from-10x-processing). 
+This workflow shows how to simulate reads using ART from the mitochondrial contig, align them to the reference with bowtie2, pull out non-mitochondrial contigs, then produce a bed file of reads that are mapped with macs2. We then recommend merging this file with an existing reference blacklist (e.g. ENCODE) to create a final combined blacklist. We include these combined blacklists for four common reference genomes (hg19, hg38, mm9, mm10, CHM13v2) already in the [combinedBlacklist](https://github.com/caleblareau/mitoblacklist/tree/master/combinedBlacklist) folder. This bedfile can be used in conjugation with a hard masking of the reference genome [to increase coverage in one alignment as we outline here](https://github.com/caleblareau/mgatk/wiki/Increasing-coverage-from-10x-processing). 
 
 
 ### Updated June 10, 2022
@@ -41,7 +41,7 @@ rm "fastq/${genome}_dat.aln"
 gzip "fastq/${genome}_dat.fq"
 
 # Align to the full reference genome with bowtie2
-bowtie2 -p $THREADS -x $REF -U "fastq/${genome}_dat.fq.gz" | samtools view -bS - | samtools sort -@ $THREADS - -o "bam/${out}.all.sorted.bam"
+bowtie2 -p $THREADS -x $REF -U "fastq/${genome}_dat.fq.gz" | samtools view -bS - | samtools sort -@ $THREADS - -o "bam/${genome}.all.sorted.bam"
 samtools index "bam/${genome}.all.sorted.bam"
 
 # Extract non mitochondrial chromosomes
